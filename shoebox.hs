@@ -5,14 +5,35 @@ where
 
 import qualified Data.Text as T
 import qualified Data.Map as M
+import qualified Control.Applicative as CA
 
-shoeDB :: M.Map T.Text T.Text
-shoeDB = M.fromList [
+-- types of databases
+type ShoeLexiconDB = M.Map T.Text T.Text    -- base words, lexicon
+type ShoeSuffixDB = M.Map T.Text T.Text   	-- suffixes
+type ShoeParsingDB = M.Map T.Text [T.Text]  -- parsing
+
+
+shoeLexiconDB :: ShoeLexiconDB
+shoeLexiconDB = M.fromList [
 	("maison","house")
 	]
 
-type ShoeDB = M.Map T.Text T.Text
+shoeSuffixDB :: ShoeSuffixDB
+shoeSuffixDB = M.fromList [
+	("s","PL")
+	]
 
-gloss :: T.Text -> ShoeDB -> Maybe T.Text
-gloss w db = M.lookup w db
+shoeParsingDB :: ShoeParsingDB
+shoeParsingDB = M.fromList [
+	("maisons",["maison", "s"])
+	]
 
+type ShoeDB = (ShoeLexiconDB, ShoeSuffixDB, ShoeParsingDB)
+shoeDB = (shoeLexiconDB, shoeSuffixDB, shoeParsingDB)
+
+helper :: Maybe T.Text -> Maybe [T.Text]
+helper Nothing = Nothing
+helper (Just val) = Just [val]
+
+gloss :: T.Text -> ShoeDB -> Maybe [T.Text]
+gloss w (ldb, sdb, pdb) = M.lookup w pdb CA.<|> helper (M.lookup w sdb) CA.<|> helper (M.lookup w ldb)
