@@ -1,11 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
-module ShoeOne where
+module Shoebox where
 
 import Data.Text (Text)
-import qualified Data.Text as T
 import qualified Data.Map as M
 import Data.Maybe
-import Control.Applicative
 
 -- types of databases
 type ShoeParsingDB = M.Map Text [MorphemeBreak]  -- parsing
