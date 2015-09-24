@@ -1,0 +1,683 @@
+\_sh v2.0a le   20 136   s Default         -648210551       
+
+\le -
+\_no 00001
+\me _
+\co 
+
+\le a
+\_no 00002
+\me 3sPF; 3sFUT
+\co 
+
+\le ai
+\_no 00003
+\me 1sPF; 1sFUT
+\co 
+
+\le aient
+\_no 00004
+\me 3pIPF; 3pCOND
+\co 
+
+\le ais
+\_no 00005
+\me 12sIPF; 12sCOND
+\co 
+
+\le ait
+\_no 00006
+\me 3sIPF; 3sCOND
+\co 
+
+\le ant
+\_no 00007
+\me PART
+\co 
+
+\le as
+\_no 00008
+\me 2sPF; 2sFUT
+\co 
+
+\le ass
+\_no 00009
+\me COND.IPF
+\co 
+
+\le ation
+\_no 00010
+\me ABSTR
+\co 
+
+\le aucun
+\_no 00011
+\me keiner
+\co 
+
+\le autre
+\_no 00012
+\me anderer
+\co 
+
+\le à
+\_no 00013
+\me DAT; nach; in; auf; bei; um; zu; bis; mit; für
+\co 
+
+\le à_cause_de
+\_no 00014
+\me wegen
+\co 
+
+\le à_quoi
+\_no 00015
+\me wozu?; woran?
+\co 
+
+\le à_quoi_estce_que
+\_no 00016
+\me wozu?; woran?
+\co 
+
+\le âmes
+\_no 00017
+\me 1pPF
+\co 
+
+\le ât
+\_no 00018
+\me 3sSUBJ.IPF
+\co 
+
+\le âtes
+\_no 00019
+\me 2pPF
+\co 
+
+\le ce
+\_no 00020
+\me DEM
+\co 
+
+\le ceci
+\_no 00021
+\me DEM
+\co 
+
+\le cela
+\_no 00022
+\me DEM
+\co 
+
+\le celle
+\_no 00023
+\me diejenige
+\co 
+
+\le celles
+\_no 00024
+\me diejenigen
+\co 
+
+\le celui
+\_no 00025
+\me derjenige
+\co 
+
+\le celui=ci
+\_no 00026
+\me DEM
+\co 
+
+\le celui=là
+\_no 00027
+\me DEM
+\co 
+
+\le celui=si
+\_no 00028
+\me DEM
+\co 
+
+\le certain
+\_no 00029
+\me ein_gewisser
+\co 
+
+\le ceux
+\_no 00030
+\me diejenigen
+\co 
+
+\le ci
+\_no 00031
+\me DEM
+\co 
+
+\le collection
+\_no 00032
+\me Sammlung
+\co 
+
+\le comp
+\_no 00033
+\me COMP
+\co 
+
+\le ça
+\_no 00034
+\me DEM
+\co 
+
+\le de
+\_no 00035
+\me GEN; INF; PARTITIV; zu; von; aus; bei; in; auf; mit; vor
+\co 
+
+\le de_quoi
+\_no 00036
+\me wovon?
+\co 
+
+\le de_quoi_estce_que
+\_no 00037
+\me wovon?
+\co 
+
+\le dix=septième
+\_no 00038
+\me siebzehnter
+\co 
+
+\le e
+\_no 00039
+\me f
+\co 
+
+\le e
+\_no 00040
+\me 1sPRES; 3sPRES; 13SUBJ; IMPs
+\co 
+
+\le elle
+\_no 00041
+\me 3sfPRON
+\co 
+
+\le elles
+\_no 00042
+\me 3pfPRON
+\co 
+
+\le en
+\_no 00043
+\me davon; GER; in; an; bei
+\co 
+
+\le ent
+\_no 00044
+\me 3pPRES; 3pSUBJ
+\co 
+
+\le er
+\_no 00045
+\me INF; FUT; COND
+\co 
+
+\le es
+\_no 00046
+\me 2sSUBJ
+\co 
+
+\le eux
+\_no 00047
+\me 3pmPRONe
+\co 
+
+\le ez
+\_no 00048
+\me 2pPRES; 2pFUT; IMPp
+\co 
+
+\le é
+\_no 00049
+\me PP
+\co 
+
+\le èrent
+\_no 00050
+\me 3pPF
+\co 
+
+\le i
+\_no 00051
+\me PP
+\co 
+
+\le ien
+\_no 00052
+\me isch
+\co 
+
+\le iez
+\_no 00053
+\me 2pIPF; 2pCOND; 2pSUBJ
+\co 
+
+\le ième
+\_no 00054
+\me ORD
+\co 
+
+\le ii
+\_no 00055
+\me II.
+\co 
+
+\le il
+\_no 00056
+\me 3smPRON
+\co 
+
+\le ils
+\_no 00057
+\me 3pmPRON
+\co 
+
+\le ions
+\_no 00058
+\me 1pIPF; 1pCOND; 1pSUBJ
+\co 
+
+\le ique
+\_no 00059
+\me N>ADJ
+\co 
+
+\le irent
+\_no 00060
+\me 3pPF
+\co 
+
+\le iss
+\_no 00061
+\me SUBJ.IPF
+\co 
+
+\le ìrent
+\_no 00062
+\me 3pPF
+\co 
+
+\le îmes
+\_no 00063
+\me 1pPF
+\co 
+
+\le ît
+\_no 00064
+\me 3sSUBJ.IPF
+\co 
+
+\le îtes
+\_no 00065
+\me 2pPF
+\co 
+
+\le je
+\_no 00066
+\me 1sPRON
+\co 
+
+\le la
+\_no 00067
+\me ARTf; 3sfPRON.A
+\co 
+
+\le laquelle
+\_no 00068
+\me RELf
+\co 
+
+\le le
+\_no 00069
+\me ARTm; 3smPRON.A
+\co 
+
+\le lequel
+\_no 00070
+\me RELm
+\co 
+
+\le les
+\_no 00071
+\me 3pPRON.A
+\co 
+
+\le leur
+\_no 00072
+\me 3pPOSS; 3pPRON.D; ihriges
+\co 
+
+\le lui
+\_no 00073
+\me 3sPRON.D; 3smPRONe
+\co 
+
+\le l'un_et_l'autre
+\_no 00074
+\me beide
+\co 
+
+\le l'un_l'autre
+\_no 00075
+\me einander
+\co 
+
+\le ma
+\_no 00076
+\me 1sPOSSf
+\co 
+
+\le me
+\_no 00077
+\me 1sPRON.DA
+\co 
+
+\le ment
+\_no 00078
+\me ADV; ABSTR
+\co 
+
+\le même
+\_no 00079
+\me selbst
+\co 
+
+\le mien
+\_no 00080
+\me meiniges
+\co 
+
+\le moi
+\_no 00081
+\me 1sPRONe
+\co 
+
+\le mon
+\_no 00082
+\me 1sPOSSm
+\co 
+
+\le ne
+\_no 00083
+\me NEG
+\co 
+
+\le non
+\_no 00084
+\me nein; nicht
+\co 
+
+\le notre
+\_no 00085
+\me 1pPOSS
+\co 
+
+\le nous
+\_no 00086
+\me 1pPRON; 1pPRON.DA
+\co 
+
+\le nôtre
+\_no 00087
+\me unsriges
+\co 
+
+\le on
+\_no 00088
+\me man
+\co 
+
+\le ons
+\_no 00089
+\me 1pPRES; 1pFUT; KOHORT
+\co 
+
+\le ont
+\_no 00090
+\me 3pFUT
+\co 
+
+\le par
+\_no 00091
+\me durch; über; aus; mit
+\co 
+
+\le pas
+\_no 00092
+\me NEG; Schritt
+\co 
+
+\le pour
+\_no 00093
+\me für; um...zu; wegen; aus; nach
+\co 
+
+\le que
+\_no 00094
+\me dass; REL.A; was?; nur; als
+\co 
+
+\le quel
+\_no 00095
+\me welcher?
+\co 
+
+\le quelque_chose
+\_no 00096
+\me etwas
+\co 
+
+\le qu'est=ce_que
+\_no 00097
+\me was?
+\co 
+
+\le qu'est=ce_qui
+\_no 00098
+\me was?
+\co 
+
+\le qui
+\_no 00099
+\me REL; wer?
+\co 
+
+\le quint
+\_no 00100
+\me V.
+\co 
+
+\le qulqu'un
+\_no 00101
+\me jemand
+\co 
+
+\le re
+\_no 00102
+\me INF; FUT; COND
+\co 
+
+\le s
+\_no 00103
+\me PL
+\co 
+
+\le s
+\_no 00104
+\me 12sPRES; 2sPRES; 12sPF; IMPs; PP
+\co 
+
+\le sa
+\_no 00105
+\me 3sPOSSf
+\co 
+
+\le sans
+\_no 00106
+\me ohne
+\co 
+
+\le se
+\_no 00107
+\me REFL; 4sPRON.DA; 4pPRON.DA
+\co 
+
+\le sien
+\_no 00108
+\me seiniges
+\co 
+
+\le sincèrement
+\_no 00109
+\me ehrlich
+\co 
+
+\le soi
+\_no 00110
+\me 4sPRONe
+\co 
+
+\le son
+\_no 00111
+\me 3sPOSSm
+\co 
+
+\le son
+\_no 00112
+\me Klang; Ton; Laut; Kleie
+\lk 1
+\co 
+
+\le sous
+\_no 00113
+\me unter
+\co 
+
+\le sur
+\_no 00114
+\me auf; über; an
+\co 
+
+\le t
+\_no 00115
+\me 3sPRES; 3sPF; PP
+\co 
+
+\le ta
+\_no 00116
+\me 2sPOSSf
+\co 
+
+\le te
+\_no 00117
+\me 2sPRON.DA
+\co 
+
+\le tel
+\_no 00118
+\me solcher
+\co 
+
+\le tien
+\_no 00119
+\me deiniges
+\co 
+
+\le toi
+\_no 00120
+\me 2sPRONe
+\co 
+
+\le ton
+\_no 00121
+\me Ton
+\co 
+
+\le ton
+\_no 00122
+\me 2sPOSSm
+\co 
+
+\le tout
+\_no 00123
+\me jeder; ganz; alles
+\co 
+
+\le tu
+\_no 00124
+\me 2sPRON
+\co 
+
+\le u
+\_no 00125
+\me PP
+\co 
+
+\le un
+\_no 00126
+\me ARTindef
+\co 
+
+\le vers
+\_no 00127
+\me gegen; nach
+\co 
+
+\le vers
+\_no 00128
+\me Vers
+\co 
+
+\le vi
+\_no 00129
+\me VI.
+\co 
+
+\le votre
+\_no 00130
+\me 2pPOSS
+\co 
+
+\le vous
+\_no 00131
+\me 2pPRON; 2pPRON.DA
+\co 
+
+\le vôtre
+\_no 00132
+\me euriges
+\co 
+
+\le xvi
+\_no 00133
+\me XVI
+\co 
+
+\le y
+\_no 00134
+\me dort(hin)
+\co 
+
+\le 70
+\_no 00135
+\me 70
+\co 
+
+\le _
+\_no 00136
+\me _
+\co 
+

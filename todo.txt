@@ -1,0 +1,142 @@
+0. Bugfix: ILBs should contain also the input element and more constructors
+1. Create a function 'intl' which takes a sentence and which returns a list of interlinear blocks
+2. User Interaction
+2.1. Multiple Entries Found
+2.2. No Entry Found
+3. Use files instead of hardcoded data
+4. Pretty print ILBs
+5. Graphical User interface based on ncurses
+6. Implementing Morphology: Suffix -> Affix
+6.1. Suffix
+6.2. Prefix
+6.3. Konfix
+6.4. Infix
+6.5. Composition
+6.6. Reduplication
+6.7. Detached Affixes and Phraseology
+7. DSL for configuration of advanced scenarios
+
+0. Bugfix: ILBs should contain also the input element and more constructors
+gloss "maisons" shoeDB
+
+instead:
+[ILB (MB [MorphemeLex "maison",MorphemeSuffix "s"]) [Meaning "house",Abbreviation "PL"]]
+rather:
+[ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
+
+1. Create a function 'intl' which takes a sentence (being a list of textelements) and which returns a list of interlinear blocks:
+intl :: [TextEl] -> ShoeDB -> [InterlinearBlock]
+
+or rather: which takes a sentence (being a string of textelements seperated by whitespace):
+intl :: Text -> ShoeDB -> [InterlinearBlock]
+
+Interlinearization should proceed either until the last textelement has been reached or until one pf
+them returned an ABORT-Signal. (In this case the remaining following textelements should be glossed with empty
+lists.)
+
+2. User Interaction
+User interaction is required in tweo cases: whenever any of the M.lookup-functions returns either
+multiple or no results.
+
+2.1. Multiple Entries Found
+The user should be prompted with a list od numbered choices from which he can choose one as a return
+value for the lookup by entering its number, e.g.
+M.lookup 'maison' returns:
+(1) house (2) building (x) none of these, add new value to this list
+
+In addition the following choices should be possible:
+(s) skip this gloss, return '***' als return value
+(m) annotate manually, i.e. enter a gloss which is not going to be saved into any database
+(a) abort interlinearization, i.e. return an ABORT-Signal
+(t) try applying external script(s) on this textelement and either insert result into database or
+just annotate
+
+2.2. No Entry Found
+In this case the following options should be presented to the user:
+(i) insert into one of the databases
+	(1) shoeLexiconDB
+	(2) shoeSuffixDB
+	(3) shoeParsinDB
+
+In addition the following choices should be possible:
+(s) skip this gloss, i.e. return '***' als return value
+(m) annotate manually, i.e. enter a gloss which is not going to be saved into any database
+(a) abort interlinearization, i.e. return an ABORT-Signal
+(t) try applying external script(s) on this textelement and either insert result into database or
+just annotate
+
+3. Use files instead of hardcoded data
+Use the files frz.u8, frzsf.u8 and frzps.u8 as files. The first two can be converted
+straightforward, whereas frzps.u8 will need some edit to implement the Labels MorphemeLex and
+MorphemeSuffix (can be done easily by checking each element against frzsf.u8)
+
+4. Pretty print ILBs
+from the result of 'gloss "maisons"':
+[ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
+
+create output:
+
+maisons
+maison-s
+house -PL
+
+5. Graphical User interface based on ncurses
+Should look like close to the original
+
+6. Implementing Morphology: Suffix -> Affix, Introduce ShoePrefixDB
+So far we have only implemented suffixes, i.e. affixes following the lexical element. However, there are more
+morphological units to consider.
+
+6.1. Suffixes
+already implemented
+
+6.2. Prefixes
+e.g. German un- as in "unwahr" should result in: un-wahr::NEG-true
+Easy to implement. Just needs another Database shoePrefixDB and a new constructor:
+data Morpheme = MorphemeLex LexEl | MorphemeSuffix Affix | MorphemePrefix Affix
+  deriving (Show,Eq)
+
+6.3. Konfixes
+e.g. German ge-...-t as in "geliebt", should result in ge...t-lieben-t::PP-love-DUMMY
+
+Can be solved with prefix- and suffix-functions (if no better idea to avoid DUMMY-Entries).
+
+6.4. Infixes
+e.g. Tagalog -um- as in "bumili", should result in um-bili::PRET-buy
+(basically a prefix in unusual position, can be solved by mere segmentation, no implementation needed)
+
+e.g. Arabic "yaktubu", should result in ktb-yaCCuCu::write-3smIMP
+(basically a suffix in unusual position, can be solved by mere segmentation, no implemantation needed)
+
+6.5. Compositions
+e.g. German "Donaudampfschiffahrtsgesellschaftskapptänsmützenständer" should result in
+Donau-Dampf-Schiff-Fahrt-Gesellschaft-Kapitain-Mütze-Ständer::Danube-steam-ship-society-captain-cap-rack
+
+Can be solved with normal segmentation. No implementation needed.
+
+6.6. Reduplications
+i.e. repetition of a certain Element, comes in two flavors
+a) full reduplication, e.g. Italian "piano piano" should result in RED-piano::very:slowly
+a) partial reduplication, e.g. Latin "cucurrit" should result in RED-currere-it::PF-run-3s
+
+Can be solved with prefix- and phraseology-functions, if no better idea.
+
+6.8. Phraseology
+joining immediately juxtaposed textelements into one, e.g. German "auf einmal" should result in:
+auf_einmal::suddenly
+
+Needs a special Database shoePhraseDB and a lookahead mechanism, before glossing starts.
+
+6.7. Detached Affixes
+Most difficult, but very seldom, except for German, e.g.
+"Er fuhr den Mann um" -> er::3smPRON umfáhren-(u)::knock_over-PRET den::ARTacc.s Mann::man um::<<<
+vs.
+"Er umfuhr den Mann" -> er::3smPRON úmfahren-(u)::drive_around-PRET den::ARTacc.s Mann::man
+
+Also needs a preprocessing, which scans for possible detached affixes.
+
+7. DSL for configuration of advanced scenarios
+(to be discussed)
+
+
+
