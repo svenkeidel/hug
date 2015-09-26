@@ -94,10 +94,10 @@ lookupMB (MB mbs) lexiconDB suffixDB prefixDB = map go mbs
   where
     go (MorphemeLex l)    = MeaningChoice $      fromMaybe [] (M.lookup l lexiconDB)
     go (MorphemeSuffix s) = AbbreviationChoice $ fromMaybe [] (M.lookup s suffixDB)
-    go (MorphemePrefix p) = AbbreviationChoice $ fromMaybe [] (M.lookup s prefixDB)
+    go (MorphemePrefix p) = AbbreviationChoice $ fromMaybe [] (M.lookup p prefixDB)
 
 gloss :: TextEl -> ShoeDB -> [InterlinearBlock]
-gloss textEl (lexiconDB,suffixDB,segmentationDB) = do
+gloss textEl (lexiconDB,suffixDB,prefixDB,segmentationDB) = do
   morphemeBreak <- breakTX textEl segmentationDB
   let glosses = lookupMB morphemeBreak lexiconDB suffixDB prefixDB
   return $ ILB morphemeBreak glosses
