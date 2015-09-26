@@ -1,9 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Shoebox where
 
-import Data.Text (Text)
+import Data.Text (Text, splitOn)
 import qualified Data.Map as M
 import Data.Maybe
+--import Data.List.Split (splitOn)
 
 -- types of databases
 type ShoeSegmentationDB = M.Map Text [MorphemeBreak]  -- segmentation
@@ -83,6 +84,11 @@ shoeSegmentationDB = M.fromList
                       ]
                  ]
      )
+   , ("ans", [ MB [ MorphemeLex "an"
+                      , MorphemeSuffix "s"
+                      ]
+                 ]
+     )
    ]
 
 type ShoeDB = (ShoeLexiconDB, ShoeSuffixDB, ShoePrefixDB, ShoeSegmentationDB)
@@ -107,3 +113,11 @@ gloss textEl (lexiconDB,suffixDB,prefixDB,segmentationDB) = do
   morphemeBreak <- breakTX textEl segmentationDB
   let glosses = GL (lookupMB morphemeBreak lexiconDB suffixDB prefixDB)
   return $ ILB (TX textEl) morphemeBreak glosses
+
+intlx :: [TextEl] -> ShoeDB -> [[InterlinearBlock]]
+intlx [] shoeDB = []
+intlx (x:xs) shoeDB =  gloss x shoeDB : intlx xs shoeDB
+
+intl :: Text -> ShoeDB -> [[InterlinearBlock]]
+intl s shoeDB = intlx (splitOn " " s) shoeDB
+
