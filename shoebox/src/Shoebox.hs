@@ -42,10 +42,10 @@ type TextEl = Text
 shoeLexiconDB :: ShoeLexiconDB
 shoeLexiconDB = M.fromList
   [ ("maison",["house", "building"])
-   	, ("lorsque",["when"]
-   	, ("avoir",["to_have"]
-   	, ("six",["six"]
-   	, ("an",["year"]
+   	, ("lorsque",["when"])
+   	, ("avoir",["to_have"])
+   	, ("six",["six"])
+   	, ("an",["year"])
   ]
 
 shoeSuffixDB :: ShoeSuffixDB
