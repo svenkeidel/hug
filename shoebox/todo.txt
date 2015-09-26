@@ -16,7 +16,7 @@
 6.7. Detached Affixes and Phraseology
 7. DSL for configuration of advanced scenarios
 
-0. Bugfix: ILBs should contain also the input element and more constructors
+<+>0. Bugfix: ILBs should contain also the input element and more constructors
 gloss "maisons" shoeDB
 
 instead:
@@ -35,7 +35,7 @@ them returned an ABORT-Signal. (In this case the remaining following textelement
 lists.)
 
 2. User Interaction
-User interaction is required in tweo cases: whenever any of the M.lookup-functions returns either
+User interaction is required in two cases: whenever any of the M.lookup-functions returns either
 multiple or no results.
 
 2.1. Multiple Entries Found
@@ -87,10 +87,10 @@ Should look like close to the original
 So far we have only implemented suffixes, i.e. affixes following the lexical element. However, there are more
 morphological units to consider.
 
-6.1. Suffixes
+<+>6.1. Suffixes
 already implemented
 
-6.2. Prefixes
+<+>6.2. Prefixes
 e.g. German un- as in "unwahr" should result in: un-wahr::NEG-true
 Easy to implement. Just needs another Database shoePrefixDB and a new constructor:
 data Morpheme = MorphemeLex LexEl | MorphemeSuffix Affix | MorphemePrefix Affix
@@ -101,14 +101,14 @@ e.g. German ge-...-t as in "geliebt", should result in ge...t-lieben-t::PP-love-
 
 Can be solved with prefix- and suffix-functions (if no better idea to avoid DUMMY-Entries).
 
-6.4. Infixes
+<+>6.4. Infixes
 e.g. Tagalog -um- as in "bumili", should result in um-bili::PRET-buy
 (basically a prefix in unusual position, can be solved by mere segmentation, no implementation needed)
 
 e.g. Arabic "yaktubu", should result in ktb-yaCCuCu::write-3smIMP
 (basically a suffix in unusual position, can be solved by mere segmentation, no implemantation needed)
 
-6.5. Compositions
+<+>6.5. Compositions
 e.g. German "Donaudampfschiffahrtsgesellschaftskapptänsmützenständer" should result in
 Donau-Dampf-Schiff-Fahrt-Gesellschaft-Kapitain-Mütze-Ständer::Danube-steam-ship-society-captain-cap-rack
 
@@ -121,13 +121,13 @@ a) partial reduplication, e.g. Latin "cucurrit" should result in RED-currere-it:
 
 Can be solved with prefix- and phraseology-functions, if no better idea.
 
-6.8. Phraseology
+6.7. Phraseology
 joining immediately juxtaposed textelements into one, e.g. German "auf einmal" should result in:
 auf_einmal::suddenly
 
 Needs a special Database shoePhraseDB and a lookahead mechanism, before glossing starts.
 
-6.7. Detached Affixes
+6.8. Detached Affixes
 Most difficult, but very seldom, except for German, e.g.
 "Er fuhr den Mann um" -> er::3smPRON umfáhren-(u)::knock_over-PRET den::ARTacc.s Mann::man um::<<<
 vs.

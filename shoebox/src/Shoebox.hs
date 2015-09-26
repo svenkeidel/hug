@@ -19,6 +19,13 @@ type LexEl  = Text  -- inside lexicon
 type FullEl = Text -- full element
 type Suffix = Text -- suffix
 type Prefix = Text -- prefix
+type TextEl = Text
+
+newtype TextLine = TX TextEl
+	deriving (Show, Eq)
+
+newtype GlossLine = GL [GlossChoice]
+	deriving (Show, Eq)
 
 data GlossChoice = AbbreviationChoice [Abbreviation]
                  | MeaningChoice [Meaning]
@@ -34,10 +41,9 @@ newtype MorphemeBreak = MB [Morpheme]
 data Morpheme = MorphemeLex LexEl | MorphemeSuffix Suffix | MorphemePrefix Prefix
   deriving (Show,Eq)
 
-data InterlinearBlock = ILB MorphemeBreak [GlossChoice]
-  deriving (Show,Eq)
+data InterlinearBlock = ILB TextLine MorphemeBreak GlossLine
+	deriving (Show,Eq)
 
-type TextEl = Text
 
 shoeLexiconDB :: ShoeLexiconDB
 shoeLexiconDB = M.fromList
@@ -99,5 +105,5 @@ lookupMB (MB mbs) lexiconDB suffixDB prefixDB = map go mbs
 gloss :: TextEl -> ShoeDB -> [InterlinearBlock]
 gloss textEl (lexiconDB,suffixDB,prefixDB,segmentationDB) = do
   morphemeBreak <- breakTX textEl segmentationDB
-  let glosses = lookupMB morphemeBreak lexiconDB suffixDB prefixDB
-  return $ ILB morphemeBreak glosses
+  let glosses = GL (lookupMB morphemeBreak lexiconDB suffixDB prefixDB)
+  return $ ILB (TX textEl) morphemeBreak glosses

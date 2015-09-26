@@ -21,20 +21,24 @@ spec = describe "Shoebox" $ do
 	
   it "can gloss a piece of text" $ do
 		gloss "maisons" shoeDB
-			`shouldBe` [ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
+			`shouldBe` 
+			[ILB (TX "maisons") (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]
+		gloss "j'avais" shoeDB
+			`shouldBe`
+			[ILB (TX "j'avais") (MB [MorphemePrefix "je",MorphemeLex "avoir",MorphemeSuffix "ais"]) (GL [AbbreviationChoice ["1sPRON"],MeaningChoice ["to_have"],AbbreviationChoice ["1sIPF"]])]
 
 	it "can gloss a sentence" $ do
 		intl "Lorsque j'avais six ans"
 			`shouldBe`
 			[
-			[ILB [TX "Lorsque", (MB [MorphemeLex "lorsque"]), (GL [Meaning "when"])]],
-			[ILB [TX "j'avais", (MB [MorphemePrefix "je", MorphemeLex "avoir",MorphemeSuffix "ais"]), (GL [Abbreviation "1sPRON", Meaning "to_have",Abbreviation "1sIPF"])]],
-			[ILB [TX "six", (MB [MorphemeLex "six"]), (GL [Meaning "six"])]],
-			[ILB [TX "ans", (MB [MorphemeLex "an",MorphemeSuffix "s"]), (GL [Meaning "year",Abbreviation "PL"])]]
+			[ILB (TX "Lorsque") (MB [MorphemeLex "lorsque"]) (GL [Meaning "when"])],
+			[ILB (TX "j'avais") (MB [MorphemePrefix "je", MorphemeLex "avoir",MorphemeSuffix "ais"]) (GL [Abbreviation "1sPRON", Meaning "to_have",Abbreviation "1sIPF"])],
+			[ILB (TX "six") (MB [MorphemeLex "six"]) (GL [Meaning "six"])],
+			[ILB (TX "ans") (MB [MorphemeLex "an",MorphemeSuffix "s"]) (GL [Meaning "year",Abbreviation "PL"])]
 			]
 
 	it "can pretty print an interlinear block" $ do
-		pp [ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
+		pp [ILB (TX "maisons") (MB [MorphemeLex "maison",MorphemeSuffix "s"]) (GL [Meaning "house",Abbreviation "PL"])]
 			`shouldBe`
 			"maisons\nmaison-s\nhouse -PL\n"
 
