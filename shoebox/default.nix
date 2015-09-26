@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let env = pkgs.haskellPackages.ghcWithPackages(p: with p; [
-    Cabal cabal-install hlint text
+    Cabal cabal-install hlint text hspec QuickCheck
   ]);
 in pkgs.stdenv.mkDerivation {
   name = "hug";

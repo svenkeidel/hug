@@ -17,6 +17,10 @@ type LexEl  = Text  -- inside lexicon
 type FullEl = Text -- full element
 type Suffix = Text -- suffix
 
+data GlossChoice = AbbreviationChoice [Abbreviation]
+                 | MeaningChoice [Meaning]
+  deriving (Show,Eq)
+
 data Gloss = Abbreviation Abbreviation
            | Meaning Meaning
   deriving (Show,Eq)
@@ -27,7 +31,7 @@ newtype MorphemeBreak = MB [Morpheme]
 data Morpheme = MorphemeLex LexEl | MorphemeSuffix Suffix
   deriving (Show,Eq)
 
-data InterlinearBlock = ILB MorphemeBreak [Gloss]
+data InterlinearBlock = ILB MorphemeBreak [GlossChoice]
   deriving (Show,Eq)
 
 type TextEl = Text
@@ -66,12 +70,11 @@ glossTX textEl parsingDB =
   fromMaybe [MB [MorphemeLex textEl]]
     (M.lookup textEl parsingDB)
 
-glossMB :: MorphemeBreak -> ShoeLexiconDB -> ShoeSuffixDB -> [Gloss]
-glossMB (MB mbs) lexiconDB suffixDB =
-  concatMap go mbs
+glossMB :: MorphemeBreak -> ShoeLexiconDB -> ShoeSuffixDB -> [GlossChoice]
+glossMB (MB mbs) lexiconDB suffixDB = map go mbs
   where
-    go (MorphemeLex l)    = Meaning <$>      fromMaybe [] (M.lookup l lexiconDB)
-    go (MorphemeSuffix s) = Abbreviation <$> fromMaybe [] (M.lookup s suffixDB)
+    go (MorphemeLex l)    = MeaningChoice $      fromMaybe [] (M.lookup l lexiconDB)
+    go (MorphemeSuffix s) = AbbreviationChoice $ fromMaybe [] (M.lookup s suffixDB)
 
 gloss :: TextEl -> ShoeDB -> [InterlinearBlock]
 gloss textEl (lexiconDB,suffixDB,parsingDB) = do
