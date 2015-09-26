@@ -1,5 +1,5 @@
-0. Bugfix: ILBs should contain also the input element and more constructors
-1. Create a function 'intl' which takes a sentence and which returns a list of interlinear blocks
+<+>0. Bugfix: ILBs should contain also the input element and more constructors
+<+>1. Create a function 'intl' which takes a sentence and which returns a list of interlinear blocks
 2. User Interaction
 2.1. Multiple Entries Found
 2.2. No Entry Found
@@ -7,13 +7,14 @@
 4. Pretty print ILBs
 5. Graphical User interface based on ncurses
 6. Implementing Morphology: Suffix -> Affix
-6.1. Suffix
-6.2. Prefix
-6.3. Konfix
-6.4. Infix
-6.5. Composition
-6.6. Reduplication
-6.7. Detached Affixes and Phraseology
+<+>6.1. Suffix
+<+>6.2. Prefix
+<->6.3. Konfix
+<+>6.4. Infix
+<+>6.5. Composition
+<->6.6. Reduplication
+6.7. Phraseology
+6.8. Detached Affixes
 7. DSL for configuration of advanced scenarios
 
 <+>0. Bugfix: ILBs should contain also the input element and more constructors
@@ -72,7 +73,7 @@ MorphemeSuffix (can be done easily by checking each element against frzsf.u8)
 
 4. Pretty print ILBs
 from the result of 'gloss "maisons"':
-[ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
+[ILB (TX "maisons") (MB [MorphemeLex "maison",MorphemeSuffix "s"]) (GL [Meaning "house",Abbreviation "PL"])]
 
 create output:
 
