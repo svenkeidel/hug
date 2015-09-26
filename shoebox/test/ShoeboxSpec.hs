@@ -11,11 +11,11 @@ spec :: Spec
 spec = describe "Shoebox" $ do
 
   it "can break up a piece of text into morphemes" $ do
-    glossTX "maisons" shoeParsingDB `shouldBe` [ MB [MorphemeLex "maison", MorphemeSuffix "s"] ]
-    glossTX "cadeaux" shoeParsingDB `shouldBe` [ MB [MorphemeLex "cadeau", MorphemeSuffix "s"] ]
+    glossTX "maisons" shoeSegmentationDB `shouldBe` [ MB [MorphemeLex "maison", MorphemeSuffix "s"] ]
+    glossTX "cadeaux" shoeSegmentationDB `shouldBe` [ MB [MorphemeLex "cadeau", MorphemeSuffix "s"] ]
 
-  it "can lookup the meanings of a morpheme break" $
-    glossMB (MB [MorphemeLex "maison", MorphemeSuffix "s"])
+  it "can lookup the meanings of a morpheme break" $ do
+    lookupMB (MB [MorphemeLex "maison", MorphemeSuffix "s"])
             shoeLexiconDB shoeSuffixDB
       `shouldBe` [ MeaningChoice ["house", "building"], AbbreviationChoice ["PL"] ]
 	
@@ -43,7 +43,7 @@ spec = describe "Shoebox" $ do
 			`shouldBe`
 			"This however is an example for removed punctuation-marks ignoring in-word punctuation like in dates or abbreviations e.g. 21.10.2015"
 
-	it "can convert a single data set from a lexical database"
+	it "can convert a single data set from a lexical database" $ do
 		importLexDBElem "\\le abaisser\n\\_no 00001\n\\me senken; herabsetzen; herunterlassen; vermindern; entwürdigen; demütigen\n\\lk 4\n\\co \n\\dt 17/Aug/15"
 			`shouldBe`
     ("abaisser", [ ME [ "senken", "herabsetzen", "herunterlassen", "vermindern", "entwürdigen", "demütigen" ],
@@ -54,8 +54,8 @@ spec = describe "Shoebox" $ do
                  ]
      )
 
-	it "can convert a single data set from a suffix database"
-	 importSuffDBFile "\\le a\n\\_no 00002\n\\me 3sPF; 3sFUT\n\\co" 
+	it "can convert a single data set from a suffix database" $ do
+	 importSuffDBElem "\\le a\n\\_no 00002\n\\me 3sPF; 3sFUT\n\\co" 
 	 	`shouldBe`
     ("a", [ ME [ "3sPF", "3sFUT" ],
 					  UUID [genuuid],
@@ -63,8 +63,8 @@ spec = describe "Shoebox" $ do
                  ]
      )
 
-	it "can extract prefixes from a parsing database"
-		importParsingDB shoeSuffixDB "\\fl j'avais\n\\_no 03218\n\\bk je-avoir-ais" 
+	it "can extract prefixes from a segmentation (former "parsing") database" $ do
+		importPrefixDB shoeSuffixDB "\\fl j'avais\n\\_no 03218\n\\bk je-avoir-ais" 
 			`shouldBe`
     ("je", [ ME [ "1sPRON" ],
 					  UUID [genuuid],
@@ -72,8 +72,8 @@ spec = describe "Shoebox" $ do
                  ]
      )
 	
-	it "can convert a single data set from a parsing database"
-		importParsingDB shoeSuffixDB shoePrefixDB "\\fl j'avais\n\\_no 03218\n\\bk je-avoir-ais" 
+	it "can convert a single data set from a segmentation database" $ do
+		importiSegmentationDBElem shoeSuffixDB shoePrefixDB "\\fl j'avais\n\\_no 03218\n\\bk je-avoir-ais" 
 			`shouldBe`
    		 ("j'avais", [ MB [ MorphemePrefix "je"
 			 								,	MorphemeLex "avoir"
@@ -82,7 +82,7 @@ spec = describe "Shoebox" $ do
                       ]
                  ]
      		)
-		importParsingDB shoeSuffixDB shoePrefixDB	"\\fl l'a\n\\_no 03306\n\\bk le-avoir-e; la-avoir-e"
+		importSegmentationDBElem shoeSuffixDB shoePrefixDB	"\\fl l'a\n\\_no 03306\n\\bk le-avoir-e; la-avoir-e"
 			`shouldBe`
    		 ("j'avais", [ MB [ MorphemePrefix "le"
 			 								,	MorphemeLex "avoir"

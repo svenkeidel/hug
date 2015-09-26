@@ -30,7 +30,7 @@ intl :: [TextEl] -> ShoeDB -> [InterlinearBlock]
 or rather: which takes a sentence (being a string of textelements seperated by whitespace):
 intl :: Text -> ShoeDB -> [InterlinearBlock]
 
-Interlinearization should proceed either until the last textelement has been reached or until one pf
+Interlinearization should proceed either until the last textelement has been reached or until one of
 them returned an ABORT-Signal. (In this case the remaining following textelements should be glossed with empty
 lists.)
 
@@ -138,5 +138,12 @@ Also needs a preprocessing, which scans for possible detached affixes.
 7. DSL for configuration of advanced scenarios
 (to be discussed)
 
+8. strip off punctuation:
+
+import qualified Data.Set as S
+punctuation = S.fromList ",?,-;'\""
+removePunc = filter (`S.notMember` punctuation)
+
+(should be refined so that punctuation is only being removed in front or after whitespace!)
 
 
