@@ -24,17 +24,17 @@ instead:
 rather:
 [ILB [TX "maisons", (MB [MorphemeLex "maison",MorphemeSuffix "s"]), (GL [Meaning "house",Abbreviation "PL"])]]
 
-1. Create a function 'intl' which takes a sentence (being a list of textelements) and which returns a list of interlinear blocks:
+<+>1. Create a function 'intl' which takes a sentence (being a list of textelements) and which returns a list of interlinear blocks:
 intl :: [TextEl] -> ShoeDB -> [InterlinearBlock]
 
 or rather: which takes a sentence (being a string of textelements seperated by whitespace):
 intl :: Text -> ShoeDB -> [InterlinearBlock]
 
+2. User Interaction
 Interlinearization should proceed either until the last textelement has been reached or until one of
 them returned an ABORT-Signal. (In this case the remaining following textelements should be glossed with empty
 lists.)
 
-2. User Interaction
 User interaction is required in two cases: whenever any of the M.lookup-functions returns either
 multiple or no results.
 
