@@ -1,9 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Shoebox where
+module MyShoebox where
 
 import Data.Text (Text, splitOn)
 import qualified Data.Map as M
 import Data.Maybe
+import Data.UUID
+import Data.UUID.V4
+import System.Random
+import Data.Typeable
 --import Data.List.Split (splitOn)
 
 -- types of databases
@@ -97,4 +101,10 @@ importPrefixDBElem = undefined
 importSegmentationDBElem :: ShoeSuffixDB -> ShoePrefixDB -> Text -> (Text, [DBElem])
 importSegmentationDBElem = undefined
 
-genuuid = undefined
+--genuuid :: IO Data.UUID.Types.Internal.UUID
+genuuid = nextRandom
+
+isUUID :: (Typeable a) => a -> Bool
+isUUID n = typeOf n == typeOf nextRandom
+
+
