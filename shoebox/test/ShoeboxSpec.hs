@@ -1,9 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 module ShoeboxSpec(main, spec) where
 
-import           Test.Hspec
-import           Shoebox
-import           ShoeboxSampleDatabase
+import Test.Hspec
+import Shoebox
+import ShoeboxSampleDatabase
+import Data.Typeable
+import Data.UUID
+import Data.UUID.V4
+import System.Random
+
+isUUID :: (Typeable a) => a -> Bool
+isUUID n = typeOf n == typeOf nextRandom
 
 main :: IO ()
 main = hspec spec
@@ -133,3 +140,8 @@ spec = describe "Shoebox" $ do
                     , UUID [genuuid]
                     ]
         )
+  it "generates a random UUID" $ do
+    isUUID genuuid
+    `shouldBe`
+    True
+
