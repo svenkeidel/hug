@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module MyShoebox where
+module Shoebox where
 
 import Data.Text (Text, splitOn)
 import qualified Data.Map as M
