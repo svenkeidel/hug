@@ -23,10 +23,10 @@ type Prefix = Text -- prefix
 type TextEl = Text
 
 newtype TextLine = TX TextEl
-	deriving (Show, Eq)
+  deriving (Show, Eq)
 
 newtype GlossLine = GL [GlossChoice]
-	deriving (Show, Eq)
+  deriving (Show, Eq)
 
 data GlossChoice = AbbreviationChoice [Abbreviation]
                  | MeaningChoice [Meaning]
@@ -43,58 +43,17 @@ data Morpheme = MorphemeLex LexEl | MorphemeSuffix Suffix | MorphemePrefix Prefi
   deriving (Show,Eq)
 
 data InterlinearBlock = ILB TextLine MorphemeBreak GlossLine
-	deriving (Show,Eq)
-
-
-shoeLexiconDB :: ShoeLexiconDB
-shoeLexiconDB = M.fromList
-  [ ("maison",["house", "building"])
-   	, ("lorsque",["when"])
-   	, ("avoir",["to_have"])
-   	, ("six",["six"])
-   	, ("an",["year"])
-  ]
-
-shoeSuffixDB :: ShoeSuffixDB
-shoeSuffixDB = M.fromList
-  [ ("s",["PL"])
-  	, ("ais",["1sIPF"])
-  ]
-
-shoePrefixDB :: ShoePrefixDB
-shoePrefixDB = M.fromList
-  [ ("je",["1sPRON"])
-  ]
-
-shoeSegmentationDB :: ShoeSegmentationDB
-shoeSegmentationDB = M.fromList
-   [ ("maisons", [ MB [ MorphemeLex "maison"
-                      , MorphemeSuffix "s"
-                      ]
-                 ]
-     )
-   , ("cadeaux", [ MB [ MorphemeLex "cadeau"
-                      , MorphemeSuffix "s"
-                      ]
-                 ]
-     )
-   , ("j'avais", [ MB [ MorphemePrefix "je"
-	 										, MorphemeLex "avoir"
-                      , MorphemeSuffix "ais"
-                      ]
-                 ]
-     )
-   , ("ans", [ MB [ MorphemeLex "an"
-                      , MorphemeSuffix "s"
-                      ]
-                 ]
-     )
-   ]
+  deriving (Show,Eq)
 
 type ShoeDB = (ShoeLexiconDB, ShoeSuffixDB, ShoePrefixDB, ShoeSegmentationDB)
 
-shoeDB :: ShoeDB
-shoeDB = (shoeLexiconDB, shoeSuffixDB, shoePrefixDB, shoeSegmentationDB)
+data DBElem
+  = ME [Text]
+  | UUID [Text]
+  | LK [Text]
+  | CO [Text]
+  | DT [Text]
+  deriving (Show,Eq)
 
 breakTX :: TextEl -> ShoeSegmentationDB -> [MorphemeBreak]
 breakTX textEl segmentationDB =
@@ -115,9 +74,27 @@ gloss textEl (lexiconDB,suffixDB,prefixDB,segmentationDB) = do
   return $ ILB (TX textEl) morphemeBreak glosses
 
 intlx :: [TextEl] -> ShoeDB -> [[InterlinearBlock]]
-intlx [] shoeDB = []
-intlx (x:xs) shoeDB =  gloss x shoeDB : intlx xs shoeDB
+intlx xs shoeDB =  map (`gloss` shoeDB) xs
 
 intl :: Text -> ShoeDB -> [[InterlinearBlock]]
-intl s shoeDB = intlx (splitOn " " s) shoeDB
+intl s = intlx (splitOn " " s)
 
+pp :: [InterlinearBlock] -> Text
+pp = undefined
+
+removePunc :: ShoeDB -> Text -> Text
+removePunc = undefined
+
+importLexDBElem :: Text -> DBElem
+importLexDBElem = undefined
+
+importSuffDBElem :: Text -> DBElem
+importSuffDBElem = undefined
+
+importPrefixDBElem :: ShoeSuffixDB -> Text -> (Text, [DBElem])
+importPrefixDBElem = undefined
+
+importSegmentationDBElem :: ShoeSuffixDB -> ShoePrefixDB -> Text -> (Text, [DBElem])
+importSegmentationDBElem = undefined
+
+genuuid = undefined
