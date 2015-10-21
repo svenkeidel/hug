@@ -4,8 +4,6 @@ module Shoebox where
 import Data.Text (Text, splitOn)
 import qualified Data.Map as M
 import Data.Maybe
-import Data.UUID
-import Data.UUID.V4
 import System.Random
 import Data.Typeable
 --import Data.List.Split (splitOn)
@@ -102,9 +100,9 @@ importSegmentationDBElem :: ShoeSuffixDB -> ShoePrefixDB -> Text -> (Text, [DBEl
 importSegmentationDBElem = undefined
 
 --genuuid :: IO Data.UUID.Types.Internal.UUID
-genuuid = nextRandom
+--genuuid = nextRandom
 
-isUUID :: (Typeable a) => a -> Bool
-isUUID n = typeOf n == typeOf nextRandom
+--isUUID :: (Typeable a) => a -> Bool
+--isUUID n = typeOf n == typeOf nextRandom
 
 
