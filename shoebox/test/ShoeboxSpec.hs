@@ -29,7 +29,7 @@ spec = describe "Shoebox" $ do
     gloss "maisons" shoeDB
       `shouldBe` [ ILB (TX "maisons")
                        (MB [MorphemeLex "maison",MorphemeSuffix "s"])
-                       (GL [MeaningChoice ["house"],AbbreviationChoice ["PL"]])
+                       (GL [MeaningChoice ["house","building"],AbbreviationChoice ["PL"]])
                  ]
     gloss "j'avais" shoeDB
       `shouldBe` [ ILB (TX "j'avais")
@@ -44,8 +44,8 @@ spec = describe "Shoebox" $ do
                  ]
 
   it "can gloss a sentence" $ do
-    intl "Lorsque j'avais six ans" shoeDB
-      `shouldBe` [ [ ILB (TX "Lorsque")
+    intl "lorsque j'avais six ans" shoeDB
+      `shouldBe` [ [ ILB (TX "lorsque")
                          (MB [MorphemeLex "lorsque"])
                          (GL [MeaningChoice ["when"]])
                    ]

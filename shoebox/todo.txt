@@ -51,6 +51,8 @@ In addition the following choices should be possible:
 (a) abort interlinearization, i.e. return an ABORT-Signal
 (t) try applying external script(s) on this textelement and either insert result into database or
 just annotate
+Lookup process library
+
 
 2.2. No Entry Found
 In this case the following options should be presented to the user:
