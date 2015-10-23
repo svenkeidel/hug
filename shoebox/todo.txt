@@ -5,7 +5,7 @@
 2.2. No Entry Found
 3. Use files instead of hardcoded data
 4. Pretty print ILBs
-5. Graphical User interface based on ncurses
+5. Graphical User interface based on vty/brick
 6. Implementing Morphology: Suffix -> Affix
 <+>6.1. Suffix
 <+>6.2. Prefix
@@ -39,7 +39,7 @@ lists.)
 User interaction is required in two cases: whenever any of the M.lookup-functions returns either
 multiple or no results.
 
-2.1. Multiple Entries Found
+<+>2.1. Multiple Entries Found
 The user should be prompted with a list od numbered choices from which he can choose one as a return
 value for the lookup by entering its number, e.g.
 M.lookup 'maison' returns:
@@ -54,18 +54,25 @@ just annotate
 Lookup process library
 
 
+2.1.1 Multiple Entries found (left to do)
+(m) annotate manually, i.e. enter a gloss which is not going to be saved into any database
+(x) none of these, add new value to this list
+(t) try applying external script(s) (e.g. datadeliver.pl) on this textelement and either insert result into database or
+just annotate
+(i) insert new entry into one of the databases
+
 2.2. No Entry Found
 In this case the following options should be presented to the user:
-(i) insert into one of the databases
+(i) insert new entry into one of the databases
 	(1) shoeLexiconDB
 	(2) shoeSuffixDB
-	(3) shoeParsinDB
+	(3) shoeParsingDB
 
 In addition the following choices should be possible:
 (s) skip this gloss, i.e. return '***' als return value
 (m) annotate manually, i.e. enter a gloss which is not going to be saved into any database
 (a) abort interlinearization, i.e. return an ABORT-Signal
-(t) try applying external script(s) on this textelement and either insert result into database or
+(t) try applying external script(s) (e.g. datadeliver.pl) on this textelement and either insert result into database or
 just annotate
 
 3. Use files instead of hardcoded data
@@ -83,7 +90,7 @@ maisons
 maison-s
 house -PL
 
-5. Graphical User interface based on ncurses
+5. Graphical User interface based on vty/brick
 Should look like close to the original
 
 6. Implementing Morphology: Suffix -> Affix, Introduce ShoePrefixDB
