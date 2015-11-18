@@ -19,6 +19,8 @@ library
                      , hspec
                      , random
                      , text
+                     , parsec
+                     , time
   hs-source-dirs:      src
   default-language:    Haskell2010
 

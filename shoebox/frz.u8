@@ -1,24 +1,23 @@
 \_sh v2.0a le   20 6484  s Default         -648210551       
 
-\le abaisser
+
 \_no 00001
 \me senken; herabsetzen; herunterlassen; vermindern; entwürdigen; demütigen
+\le abaisser
 \lk 4
 \co 
 \dt 17/Aug/15
 
 \le abandon
 \_no 00002
-\me Hingabe; Ungezwungenheit; Vernachlässigung; Verwahrlosen; 
-Einstellung; Aussetzen; Abbruch; Aufgabe; Preisgabe; Verlassen
+\me Hingabe; Ungezwungenheit; Vernachlässigung; Verwahrlosen; Einstellung; Aussetzen; Abbruch; Aufgabe; Preisgabe; Verlassen
 \lk 31
 \co 
 \dt 07/Sep/15
 
 \le abandonner
 \_no 00003
-\me aufgeben; verlassen; zurücklassen; im_Stich_lassen; fallenlassen; 
-verzichten
+\me aufgeben; verlassen; zurücklassen; im_Stich_lassen; fallenlassen; verzichten
 \lk 9
 \co 
 \dt 08/Aug/15

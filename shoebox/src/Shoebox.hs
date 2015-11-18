@@ -52,14 +52,6 @@ data InterlinearBlock = ILB TextLine MorphemeBreak GlossLine
 
 type ShoeDB = (ShoeLexiconDB, ShoeSuffixDB, ShoePrefixDB, ShoeSegmentationDB)
 
-data DBElem
-  = ME [Text]
-  | UUID [Text]
-  | LK [Text]
-  | CO [Text]
-  | DT [Text]
-  deriving (Show,Eq)
-
 breakTX :: TextEl -> ShoeSegmentationDB -> [MorphemeBreak]
 breakTX textEl segmentationDB =
   fromMaybe [MB [MorphemeLex textEl]]
