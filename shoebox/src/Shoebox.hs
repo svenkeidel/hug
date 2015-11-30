@@ -126,6 +126,7 @@ pp = undefined
 removePunc :: ShoeDB -> Text -> Text
 removePunc = undefined
 
+{-
 importLexDBElem :: Text -> DBElem
 importLexDBElem = undefined
 
@@ -137,6 +138,7 @@ importPrefixDBElem = undefined
 
 importSegmentationDBElem :: ShoeSuffixDB -> ShoePrefixDB -> Text -> (Text, [DBElem])
 importSegmentationDBElem = undefined
+-}
 
 --genuuid :: IO Data.UUID.Types.Internal.UUID
 --genuuid = nextRandom
