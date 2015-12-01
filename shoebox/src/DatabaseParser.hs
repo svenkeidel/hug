@@ -25,7 +25,7 @@ data DBElem
   | LK (Maybe Text)
   | CO (Maybe Text)
   | DT (Maybe Text)
-  | BK [[Text]]       -- Segmentation
+  | BK [(Text, [Text], [Text])]       -- Segmentation, Base, Prefix, Suffix
   | FL Text
   deriving (Show)
 
@@ -48,8 +48,8 @@ parseElemChar = do
   P.<|> 
   (P.try (P.newline >> P.lookAhead (P.noneOf ['\\', '\n']) ))
 
-parseElemChar2 = do
-  P.try (P.noneOf ['\n', ';','-'] )
+parseElemCharBK = do
+  P.try (P.noneOf ['\n', ';', '-', '='] )
   P.<|> 
   (P.try (P.newline >> P.lookAhead (P.noneOf ['\\', '\n']) ))
 
@@ -98,8 +98,16 @@ parseBreak :: Parsec Text () DBElem
 parseBreak = do
   P.string "\\bk" >> spaces
   bks <- P.sepEndBy (do
-      ts <- P.sepEndBy (P.many parseElemChar2) (P.char '-')
-      return (map T.pack ts)
+      ps <- P.many (P.try (do
+                              s <- P.many parseElemCharBK
+                              P.char '='
+                              return s))
+      b <- P.many parseElemCharBK
+      ss <- P.sepEndBy (P.many parseElemCharBK) (P.char '-')
+      let ss' = case ss of
+                  (_:ss) -> ss
+                  [] -> []
+      return (T.pack b, map T.pack ps, map T.pack ss')
     ) (P.char ';' >> spaces)
   return (BK bks)
 
@@ -203,7 +211,7 @@ parseSufDB dbTxt = let
 data SegEntry = SegEntry
             { sgFL :: Text
             , sgUuid :: Int
-            , sgMorphemeBreak :: [[Text]]
+            , sgMorphemeBreak :: [(Text, [Text], [Text])]
             }
             deriving (Show)
 

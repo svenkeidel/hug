@@ -8,6 +8,8 @@ import qualified Data.Text as T
 import qualified Data.Map as M
 import Data.Maybe
 
+import DatabaseParser
+
 -- types of databases
 type ShoeSegmentationDB = M.Map Text [MorphemeBreak]  -- segmentation
 type ShoeLexiconDB = M.Map LexEl [Meaning]       -- base words, lexicon
@@ -51,6 +53,29 @@ data InterlinearBlock = ILB TextLine MorphemeBreak GlossLine
   deriving (Show,Eq)
 
 type ShoeDB = (ShoeLexiconDB, ShoeSuffixDB, ShoePrefixDB, ShoeSegmentationDB)
+
+segEntryToMorphemeBreak :: SegEntry -> [MorphemeBreak]
+segEntryToMorphemeBreak e = let
+  lp = sgMorphemeBreak e
+  f = \(base, ps, ss) -> let
+        bs = [MorphemeLex base]
+        ps' = map MorphemePrefix ps
+        ss' = map MorphemeSuffix ss
+        in (MB (bs ++ ps' ++ ss'))
+  in (map f lp)
+
+loadShoeDB :: String -> IO ShoeDB
+loadShoeDB basename = do
+  -- read files
+  lexEntries <- parseDBFile parseLexDB (basename ++ ".u8")
+  sufEntries <- parseDBFile parseSufDB (basename ++ "sf.u8")
+  segEntries <- parseDBFile parseSegDB (basename ++ "ps.u8")
+  -- create ShoeDB from input
+  let lexDB = M.fromList (map (\e -> (leEntry e, leMeaning e)) lexEntries)
+  let sufDB = M.fromList (map (\e -> (suEntry e, suMeaning e)) sufEntries)
+  let segDB = M.fromList (map (\e -> (sgFL e, segEntryToMorphemeBreak e)) segEntries)
+  return (lexDB, sufDB, sufDB, segDB)
+
 
 breakTX :: TextEl -> ShoeSegmentationDB -> [MorphemeBreak]
 breakTX textEl segmentationDB =
