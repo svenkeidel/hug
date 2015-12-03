@@ -5,8 +5,10 @@ import Text.Printf
 import Data.List (intercalate)
 import Data.Text (Text, splitOn)
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Data.Map as M
 import Data.Maybe
+import System.Process
 
 import DatabaseParser
 
@@ -89,11 +91,11 @@ lookupMB (MB mbs) lexiconDB suffixDB prefixDB = map go mbs
     go (MorphemeSuffix s) = Choice $ Gloss "suffixDB" <$> fromMaybe [] (M.lookup s suffixDB)
     go (MorphemePrefix p) = Choice $ Gloss "prefixDB" <$> fromMaybe [] (M.lookup p prefixDB)
 
-data Decision = Abort | Decided Gloss | Skip
+data Decision = Abort | Decided Gloss | Skip | NewGloss [Gloss]
   deriving Show
 
-decide :: Choice -> IO Decision
-decide (Choice choices) = do
+decide :: TextEl -> Choice -> IO Decision
+decide textEl (Choice choices) = do
   printf "Multiple glosses found, please choose:\n%s\n"
              (showChoices choices)
   printf "(x) none of these, enter new gloss\n"
@@ -106,19 +108,41 @@ decide (Choice choices) = do
     Nothing ->
       let action = head line
       in case action of
-           'x' -> undefined
+           'x' -> addNewGloss choices
            's' -> return Skip
            'm' -> annotateManually
            'a' -> return Abort
-           't' -> undefined
+           't' -> externalShellScript textEl
            _ -> do
              printf "unrecognized option, try again.\n"
-             decide (Choice choices)
+             decide textEl (Choice choices)
     Just n | n == 0 || n > length choices -> do
                printf "Choice out of range, try again.\n"
-               decide (Choice choices)
+               decide textEl (Choice choices)
            | otherwise ->
                return $ Decided $ choices !! (n-1)
+
+addNewGloss :: [Gloss] -> IO Decision
+addNewGloss glosses = do
+  putStrLn "Enter a new gloss:"
+  newGloss <- T.getLine
+  putStrLn "Enter name of the database for the new gloss:"
+  db <- T.getLine
+  return $ NewGloss $ Gloss db newGloss : glosses
+
+externalShellScript :: TextEl -> IO Decision
+externalShellScript textEl = do
+  putStrLn "Enter the path to the external shell script:"
+  path <- getLine
+  putStrLn "Enter name of the database for the new gloss:"
+  db <- T.getLine
+  (Just stdin, Just stdout,_,_) <- createProcess (proc path [])
+    { std_in = CreatePipe
+    , std_out = CreatePipe
+    }
+  T.hPutStr stdin textEl
+  glosses <- T.splitOn "," <$> T.hGetLine stdout
+  return $ NewGloss $ Gloss db <$> glosses
 
 readMaybe :: Read a => String -> Maybe a
 readMaybe s = case reads s of
